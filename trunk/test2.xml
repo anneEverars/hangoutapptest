@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+  <ModulePrefs title="Your App Name">
+    <Require feature="rpc"/>
+    <Require feature="views"/>
+  </ModulePrefs>
+  <Content type="html">
+    <![CDATA[
+      <script src="//plus.google.com/hangouts/_/api/v1/hangout.js"></script>
+      <script>
+	  
+	  function init() {
+		console.log("INIT");
+		gapi.hangout.onApiReady.add(
+			function(eventObj) {
+				if (eventObj.isApiReady) {
+					gapi.hangout.hideApp();
+					gapi.hangout.onParticipantsRemoved.add(
+						function sluiten() {
+							console.log("SLUITEN!!!");
+							window.parent.name = "ARGH";
+						}
+					);
+				}
+			}
+		);
+	  }
+	  // Wait for gadget to load.                                                       
+	  gadgets.util.registerOnLoadHandler(init);
+	  </script>
+    ]]>
+  </Content>
+</Module>
